@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage'
 import NewProject from './pages/NewProject'
 import AllProjects from './pages/AllProjects'
 import HomeLandingPage from './pages/HomeLandingPage'
+import AddToDo from './pages/AddToDo'
 
 const browserRoutes=createBrowserRouter([
   {path:'',element:<Login/>},
@@ -13,7 +14,8 @@ const browserRoutes=createBrowserRouter([
     {index:true,element:<HomeLandingPage/>},
     {path:'new-project',element:<NewProject/>},
     {path:'all-project',element:<AllProjects/>},
-  ]}
+  ]},
+  {path:'/add-to',element:<AddToDo/>}
 
 ])
 function App() {
