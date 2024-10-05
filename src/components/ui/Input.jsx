@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const Input = ({ startIcon, placeholder,className,onChange,name,value ,onBlur,type='text',error}) => {
-  const defaultStyles='p-2 w-full'
+  const defaultStyles='p-2 w-full outline-none'
   const customStyles=className?className+" "+defaultStyles:defaultStyles
   return (
     <div className="w-full px-4 py-2 relative">

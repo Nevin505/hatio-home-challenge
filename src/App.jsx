@@ -14,6 +14,7 @@ const browserRoutes=createBrowserRouter([
     {index:true,element:<HomeLandingPage/>},
     {path:'new-project',element:<NewProject/>},
     {path:'all-project',element:<AllProjects/>},
+    
   ]},
   {path:'/add-to',element:<AddToDo/>}
 

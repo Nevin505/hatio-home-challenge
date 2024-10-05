@@ -79,7 +79,7 @@ const NewProject = () => {
       Add New Project
       <form onSubmit={formSubmissionHandler} className='w-1/2 flex flex-col gap-6 items-center py-4 border-2 border-red-400'>
       {Inputypes.map(inputype=>{
-        return <Input key={inputype.name} placeholder={inputype.placeholder} className="text-center" name={inputype.name} type={inputype.type} value={projectDetails?.[inputype.name]} error={error?.[inputype.name]} onChange={handleInputChange}/>
+        return <Input key={inputype.name} placeholder={inputype.placeholder} className="text-center border-b-2 focus:outline-0" name={inputype.name} type={inputype.type} value={projectDetails?.[inputype.name]} error={error?.[inputype.name]} onChange={handleInputChange}/>
       })}
           <Button variantType="rounded" >Add Project</Button>
       </form>
