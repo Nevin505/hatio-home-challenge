@@ -8,7 +8,7 @@ import useBlur from "../hooks/useBlur"
 import bcrypt from "bcryptjs";
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import { redirect, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 
 const Register = () => {
   const[userInputFields,setInputValues]=useState({userMail:'',userPassword:''});
@@ -36,12 +36,10 @@ const Register = () => {
     userField.userPassword= bcrypt.hashSync(userField.userPassword, salt);
     try{
       const resposne= await axios.post(registerUser,userField)
-      // console.log(resposne.data.message);
       toast(resposne.data.message)
        navigateTo('/')
 
     } catch(error){
-      console.log(error);
         toast(error.response.data.message)
         console.log(error.response.data.message)
     }

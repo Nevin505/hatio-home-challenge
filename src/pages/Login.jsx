@@ -6,9 +6,18 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { loginUser } from "../Api/userApi"
 import { toast, ToastContainer } from "react-toastify"
+import { patternMatching } from "../utils/validation"
+
+const mailRegexPattern=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+// const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d{2,})(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
+const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d{2,})(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$/;
+
 
 const Login = () => {
   const[inputValues,setInputValues]=useState({userMail:'',userPassword:''})
+
+  const[error,setError]=useState();
 
   const navigateTo=useNavigate();
 
@@ -17,25 +26,31 @@ const Login = () => {
     setInputValues((prevState)=>{
       return {...prevState,[inputField]:e.target.value}
     })
+
   }
   // Api for login gandler
   const loginHandler=async()=>{
     try{
-      const response=await axios.post(loginUser,inputValues);
-      if(response.status===200){
-        console.log(response)
-        navigateTo('/home') ;
-        return;
-      }
+      // if(patternMatching(inputValues.userMail,mailRegexPattern) && patternMatching(inputValues.userPassword,passwordPattern) ){
+        const response=await axios.post(loginUser,inputValues);
+        if(response.status===200){
+          console.log(response)
+          navigateTo('/home') ;
+        }
+      // }
+      // else{
+      //   alert("Enter the Correct Password")
+      // }
+
     }
     catch(error){
-          toast(error.response.data.message)
       console.log(error)
+          toast(error.response.data.message)
     }
   }
   return (
     <Container>
-    <div className="flex flex-col items-center w-1/4 gap-4 bg-primary-300 py-4 px-2 rounded-md shadow-lg">
+    <div className="flex flex-col items-center w-1/4 gap-6 bg-primary-300 py-4 px-2 rounded-md shadow-lg">
         <h1>Login</h1>
 
         <Input placeholder="Enter Email" className="rounded-md" name="userMail"onChange={(e)=>{inputValueHandler('userMail',e)}}/>
