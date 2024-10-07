@@ -20,6 +20,8 @@ const NewProject = () => {
 
   const[error,setError]=useState();
 
+  const[isLoading,setIsLoading]=useState(false);
+
  const navigateTo= useNavigate();
 
   // Handler to make api call to the backend for creating New Projects
@@ -29,6 +31,7 @@ const NewProject = () => {
       if(value){
           try{
             console.log(projectDetails)
+            setIsLoading(true)
             const response=await axios.post(createProjectApi,projectDetails);
              console.log(response)
              if(response.data.id){
@@ -39,6 +42,9 @@ const NewProject = () => {
           catch(error){
             console.log(error)
             toast('Some Unexcepted Error Ocuurred.try Again After SomeTimes')
+          }
+          finally{
+            setIsLoading(false)
           }
       }
       else{
@@ -53,7 +59,7 @@ const NewProject = () => {
       keys.forEach(key=>{
         const value=isValueTruthy(projectDetails[key]);
         if(!value){
-        errors[key]='Cannnot be Empty';
+        errors[key]=key[0].toUpperCase()+key.substring(1)+' Cannot be Empty';
         }
        
       })
@@ -75,13 +81,13 @@ const NewProject = () => {
   }
 
   return (
-    <div className='flex flex-col items-center py-2 w-1/2 border-2 border-red-400 '>
-      Add New Project
-      <form onSubmit={formSubmissionHandler} className='w-1/2 flex flex-col gap-6 items-center py-4 border-2 border-red-400'>
+    <div className='flex flex-col items-center py-2 w-1/2 border-2 border-slate-500  gap-4  rounded-lg mt-4'>
+        <p className='text-primary-500 text-xl underline p-2'>Add New Project</p>
+      <form onSubmit={formSubmissionHandler} className='w-1/2 flex flex-col gap-6 items-center py-4 border-2 border-slate-400 rounded-lg'>
       {Inputypes.map(inputype=>{
         return <Input key={inputype.name} placeholder={inputype.placeholder} className="text-center border-b-2 focus:outline-0" name={inputype.name} type={inputype.type} value={projectDetails?.[inputype.name]} error={error?.[inputype.name]} onChange={handleInputChange}/>
       })}
-          <Button variantType="rounded" >Add Project</Button>
+          <Button variantType="rounded"  disabled={isLoading} > {!isLoading?'Add Project':'Adding Project'}</Button>
       </form>
       <ToastContainer/>
     </div>

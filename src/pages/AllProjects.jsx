@@ -1,11 +1,13 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { fetchAllProjects } from "../Api/projectApi"
-import Container from "../components/ui/Container";
 import Button from "../components/ui/Button";
 import { fromatTime } from "../utils/formatter";
+import { useNavigate } from "react-router";
 
 const AllProjects = () => {
+
+ const navigateTo=useNavigate();
 
   const[projects,setProjects]=useState([]);
   useEffect(()=>{
@@ -20,6 +22,10 @@ const AllProjects = () => {
     }
     fetchProjects()
   },[])
+
+  const viewProjectHandlder=(projectId)=>{
+      navigateTo('/project/'+projectId)
+  }
   return (
     <div>
       
@@ -29,7 +35,7 @@ const AllProjects = () => {
          return<div key={project._id} className="flex  flex-col items-center gap-2 px-4 py-2 border-2 border-black rounded-md mt-2 ">
           <p>Title:{project.title}</p>
           <p>Created At:{fromatTime(project.createdAt)}</p>
-          <Button variantType="rounded">View More</Button>
+          <Button variantType="rounded" onClick={()=>{viewProjectHandlder(project._id)}} >View More</Button>
           </div>
         })}
        </div>

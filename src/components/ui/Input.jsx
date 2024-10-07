@@ -8,7 +8,7 @@ const Input = ({ startIcon, placeholder,className,onChange,name,value ,onBlur,ty
       {startIcon && startIcon}
       <input className={customStyles} placeholder={placeholder} onChange={onChange} name={name} value={value}
       onBlur={onBlur} type={type}/>
-      {error && <p className="absolute left-1/4 pb-1 text-red-600">{error}</p>}
+      {error && <p className="absolute pb-1 text-red-600">* {error}</p>}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Button = ({startIcon,children,className,variantType,onClick}) => {
+const Button = ({startIcon,children,className,variantType,onClick,disabled}) => {
   const defaultStyles='px-4 py-2  bg-primary-500 hover:bg-primary-600';
   let buttonStyles;
   if(variantType==='rounded'){
@@ -13,7 +13,7 @@ const Button = ({startIcon,children,className,variantType,onClick}) => {
   return (
     <div>
         {startIcon && startIcon}
-        <button className={buttonStyles} onClick={onClick}>{children}</button>
+        <button className={buttonStyles} onClick={onClick} disabled={disabled}>{children}</button>
     </div>
   )
 }
@@ -22,6 +22,7 @@ Button.propTypes={
     children:PropTypes.string.isRequired,
     className:PropTypes.string,
     variantType:PropTypes.string,
-    onClick:PropTypes.func
+    onClick:PropTypes.func,
+    disabled:PropTypes.bool
 };
 export default Button

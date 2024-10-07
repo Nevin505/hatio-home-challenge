@@ -16,6 +16,7 @@ const HomePage = () => {
         <Card onClick={()=>{handleNavigateTo('all-project')}}>View All Projects</Card>
         <Card onClick={()=>{handleNavigateTo('new-project')}}>View A Project</Card>
        </div>
+       {/* Outlet for Renderng the childrens */}
         <Outlet/>
 
     </div>

@@ -4,19 +4,20 @@ import Register from './pages/Register'
 import HomePage from './pages/HomePage'
 import NewProject from './pages/NewProject'
 import AllProjects from './pages/AllProjects'
-import HomeLandingPage from './pages/HomeLandingPage'
 import AddToDo from './pages/AddToDo'
+import Project from './pages/Project'
 
 const browserRoutes=createBrowserRouter([
   {path:'',element:<Login/>},
   {path:'/regsiter',element:<Register/>},
   {path:'/home',element:<HomePage/>,children:[
-    {index:true,element:<HomeLandingPage/>},
+    {index:true,element:<p>Please Select a Option</p>},
     {path:'new-project',element:<NewProject/>},
     {path:'all-project',element:<AllProjects/>},
     
   ]},
-  {path:'/add-to',element:<AddToDo/>}
+  {path:'/add-to',element:<AddToDo/>},
+  {path:'/project/:projectId',element:<Project/>}
 
 ])
 function App() {
